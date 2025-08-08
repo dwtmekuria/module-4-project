@@ -31,7 +31,12 @@ var productSlice = createSlice(
         ],
         reducers:{
             addProduct:(state,action)=>{
-                state.push(action.payload)
+                state.push({
+                    id: action.payload.id,
+                    title: action.payload.title,
+                    description: action.payload.description,
+                    price: parseFloat(action.payload.price),
+                });
             }
         }
     }
