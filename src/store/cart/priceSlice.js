@@ -1,15 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-var cartSlice = createSlice(
+const cartSlice = createSlice(
     {
         name:"price",
         initialState:0,
         reducers:{
             add:(state,action)=>
-                state + action.payload
-        },
+                state + action.payload,
             remove:(state,action)=>
                 state - action.payload
+            
+        },
+            
     }
 ); 
 

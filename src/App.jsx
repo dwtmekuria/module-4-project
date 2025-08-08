@@ -33,9 +33,9 @@ function App() {
     dispatch(addCart(newCart));
     dispatch(add(product.price));
   }
-  function handleRemoveFromCart(product) {
-    dispatch(removeCart(product));
-    dispatch(remove(product.price));
+  function handleRemoveFromCart(cart) {
+    dispatch(removeCart(cart));
+    dispatch(remove(cart.price));
   }
 
   const handleModalOpen = () => {
@@ -70,11 +70,12 @@ function App() {
             <th className={thStyle}>Title</th>
             <th className={thStyle}>Price</th>
             <th className={thStyle}>Quantity</th>
+            <th className={thStyle}>Action</th>
           </tr>
         </thead>
         <tbody>
           {cartList.map((cart) => (
-            <Cart key={cart.id} {...cart} thStyle={thStyle}/>
+            <Cart key={cart.id} {...cart} thStyle={thStyle} handleRemove={()=>handleRemoveFromCart(cart)}/>
           ))}
         </tbody>
         <tfoot>
