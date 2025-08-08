@@ -6,7 +6,11 @@ var cartSlice = createSlice(
         initialState:[],
         reducers:{
             addCart:(state,action)=>{
-                state.push(action.payload)
+                const existingItem = state.find((cart) => cart.id == action.payload.id)
+                if (existingItem)
+                    existingItem.quantity += 1;
+                else
+                    state.push(action.payload);
             },
             removeCart:(state,action)=>{
                 return state.slice(

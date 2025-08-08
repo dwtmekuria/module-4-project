@@ -32,7 +32,7 @@ var productSlice = createSlice(
         reducers:{
             addProduct:(state,action)=>{
                 state.push({
-                    id: action.payload.id,
+                    id: state.length + 1,
                     title: action.payload.title,
                     description: action.payload.description,
                     price: parseFloat(action.payload.price),

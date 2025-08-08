@@ -1,4 +1,4 @@
-function Cart({ id, title, price ,thStyle}) {
+function Cart({ id, title, price ,quantity,thStyle}) {
   
 
   return (
@@ -6,6 +6,7 @@ function Cart({ id, title, price ,thStyle}) {
       <td className={thStyle}>{id}</td>
         <td className={thStyle}>{title}</td>
         <td className={thStyle}>{price}</td>
+        <td className={thStyle}>{quantity}</td>
     </tr>
   );
 }

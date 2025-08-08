@@ -27,6 +27,7 @@ function App() {
       id: product.id,
       title: product.title,
       price: product.price,
+      quantity: 1,
     };
 
     dispatch(addCart(newCart));
@@ -42,7 +43,6 @@ function App() {
   };
   function handleAddProduct(product) {
     dispatch(addProduct(product));
-    handleModalOpen();
   }
   return (
     <div className="flex flex-col">
@@ -69,6 +69,7 @@ function App() {
             <th className={thStyle}>#</th>
             <th className={thStyle}>Title</th>
             <th className={thStyle}>Price</th>
+            <th className={thStyle}>Quantity</th>
           </tr>
         </thead>
         <tbody>
