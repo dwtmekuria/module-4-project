@@ -1,38 +1,41 @@
 import "./App.css";
-import Card from "./assets/Components/Card";
+import Card from "./Components/Card";
 
 function App() {
   const products = [
     {
       id: 1,
-      name: "Product 1",
+      title: "Product 1",
       description: "something something something",
       price: 250,
     },
     {
       id: 2,
-      name: "Product 2",
+      title: "Product 2",
       description: "something something something",
       price: 250,
     },
     {
       id: 3,
-      name: "Product 3",
+      title: "Product 3",
       description: "something something something",
       price: 250,
     },
     {
       id: 4,
-      name: "Product 4",
+      title: "Product 4",
       description: "something something something",
       price: 250,
     },
   ];
   return (
-    <div className="h-screen">
-      {products.map((product) => (
-        <Card className="flex" key={product.ID} {...product} />
-      ))}
+    <div className="flex flex-col">
+      <h1 className="text-7xl text-center p-4">Products</h1>
+      <div className="flex p-3 gap-3 justify-center">
+        {products.map((product) => (
+          <Card className="" key={product.ID} {...product} />
+        ))}
+      </div>
     </div>
   );
 }
