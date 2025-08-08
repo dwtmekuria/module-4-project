@@ -37,11 +37,16 @@ var productSlice = createSlice(
                     description: action.payload.description,
                     price: parseFloat(action.payload.price),
                 });
+
+            },
+            removeProduct:(state, action) => {
+                return state.filter(product => product.id !== action.payload);
             }
+
         }
     }
 )
 
 export default productSlice.reducer;
 
-export const { addProduct } = productSlice.actions;
+export const { addProduct,removeProduct } = productSlice.actions;

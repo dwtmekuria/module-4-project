@@ -9,6 +9,8 @@ import { add } from "./store/cart/priceSlice.js";
 import { remove } from "./store/cart/priceSlice.js";
 import { removeCart } from "./store/cart/cartSlice.js";
 import { addProduct } from "./store/cart/productSlice.js";
+import { removeProduct } from "./store/cart/productSlice.js";
+import { decreaseCart } from "./store/cart/cartSlice.js";
 
 
 function App() {
@@ -35,15 +37,23 @@ function App() {
   }
   function handleRemoveFromCart(cart) {
     dispatch(removeCart(cart));
+    dispatch(remove(cart.price* cart.quantity));
+  }
+  function handleDecreaseFromCart(cart) {
+    dispatch(decreaseCart(cart));
     dispatch(remove(cart.price));
   }
-
   const handleModalOpen = () => {
     setIsModalOpen((prev) => !prev);
   };
   function handleAddProduct(product) {
     dispatch(addProduct(product));
   }
+  function handleRemoveProduct(id) {
+    dispatch(removeProduct(id));
+  }
+  
+
   return (
     <div className="flex flex-col">
       <h1 className="text-4xl text-center p-4">Products</h1>
@@ -59,6 +69,8 @@ function App() {
             key={product.id}
             {...product}
             addToCart={() => handleAddToCart(product)}
+            removeProduct={()=>handleRemoveProduct(product.id)}
+
           />
         ))}
       </div>
@@ -75,7 +87,14 @@ function App() {
         </thead>
         <tbody>
           {cartList.map((cart) => (
-            <Cart key={cart.id} {...cart} thStyle={thStyle} handleRemove={()=>handleRemoveFromCart(cart)}/>
+            <Cart 
+            key={cart.id} 
+            {...cart} 
+            thStyle={thStyle} 
+            handleRemove={()=>handleRemoveFromCart(cart)}
+            increase={() => handleAddToCart(cart)}
+            decrease={() => handleDecreaseFromCart(cart)}
+            />
           ))}
         </tbody>
         <tfoot>

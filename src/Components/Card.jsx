@@ -1,8 +1,13 @@
-function Card({ id, title, description, price, addToCart }) {
+function Card({ id, title, description, price, addToCart ,removeProduct}) {
   return (
     <>
       <div className="flex-wrap flex flex-col hover:scale-123 border-2 rounded-lg hover:shadow-2xl p-3 ease-in-out transition-all duration-300 delay-300 bg-purple-300">
-        <h1 className="text-2xl text-center pb-2">{title}</h1>
+        <div className="flex justify-between items-center border-b pb-2">
+          <h1 className="text-2xl text-center pb-2">{title}</h1>
+          <button onClick={removeProduct} className="cursor-pointer text-5xl text-gray-500 hover:text-red-500">
+            ×
+          </button>
+        </div>
         <div className="text-center pb-2">{description}</div>
         <div className="text-center pb-2">{price}$</div>
         <button
