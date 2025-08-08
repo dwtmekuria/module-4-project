@@ -1,37 +1,21 @@
 import "./App.css";
 import Card from "./Components/Card";
 import Cart from "./Components/Cart";
+import AddProductModal from "./Components/AddProductModal";
 import { useSelector, useDispatch } from "react-redux";
+import { addCart } from "./store/cart/cartSlice.js";
+import { add } from "./store/cart/priceSlice.js";
+import { remove } from "./store/cart/priceSlice.js";
+import { removeCart } from "./store/cart/cartSlice.js";
 
-var dispatch = useDispatch();
+
 function App() {
-  const products = [
-    {
-      id: 1,
-      title: "Product 1",
-      description: "something something something",
-      price: 250,
-    },
-    {
-      id: 2,
-      title: "Product 2",
-      description: "something something something",
-      price: 250,
-    },
-    {
-      id: 3,
-      title: "Product 3",
-      description: "something something something",
-      price: 250,
-    },
-    {
-      id: 4,
-      title: "Product 4",
-      description: "something something something",
-      price: 250,
-    },
-  ];
-
+  var dispatch = useDispatch();
+  
+  var cartList = useSelector((state) => state.cartState);
+  var totalPrice = useSelector((state) => state.priceState);
+  var products = useSelector((state) => state.productState);
+  let thStyle = "p-2 border border-gray-300 text-left";  
   function handleAddToCart(product) {
     var newCart = {
       id: product.id,
@@ -39,14 +23,17 @@ function App() {
       price: product.price,
     };
 
-    dispatch(addToCart(newCart));
+    dispatch(addCart(newCart));
+    dispatch(add(product.price));
   }
 
-  var cartList = useSelector((state) => state.cartState);
-  //console.log(cartList);
   return (
     <div className="flex flex-col">
-      <h1 className="text-7xl text-center p-4">Products</h1>
+      <h1 className="text-4xl text-center p-4">Products</h1>
+      <button
+        className="p-1 pr-3 pl-3 items-center self-center bg-blue-400 w-fit rounded-xl m-2 hover:shadow-2xl cursor-pointer ease-in-out transition-colors duration-900 delay-300 hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-600"
+      >
+        Add New Product</button>
       <div className="flex p-3 gap-3 justify-center">
         {products.map((product) => (
           <Card
@@ -57,9 +44,29 @@ function App() {
           />
         ))}
       </div>
-      {cartList.map((cart) => (
-        <Cart key={cart.id} {...cart} />
-      ))}
+      <table className="m-6 w-full">
+        <caption className="text-4xl table-caption">Cart</caption>
+        <thead>
+          <tr>
+            <th className={thStyle}>#</th>
+            <th className={thStyle}>Title</th>
+            <th className={thStyle}>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartList.map((cart) => (
+            <Cart key={cart.id} {...cart} thStyle={thStyle}/>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total Price: {totalPrice}</td>
+          </tr>
+        </tfoot>
+      </table>
+          <AddProductModal />
     </div>
   );
 }
